@@ -1,32 +1,30 @@
 {
-  "name": "loopback-jsonapi-model-serializer",
+  "name": "@mediasuite/loopback-jsonapi-model-serializer",
   "description": "JSONAPI Model serializer for loopback",
   "version": "1.0.1",
   "license": "MIT",
-  "main": "./dist/index.js",
+  "main": "./lib/index.js",
+  "files": ["lib"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/digitalsadhu/loopback-jsonapi-model-serializer.git"
+    "url": "git+https://github.com/mediasuitenz/loopback-jsonapi-model-serializer.git"
   },
   "bugs": {
-    "url": "https://github.com/digitalsadhu/loopback-jsonapi-model-serializer/issues"
+    "url": "https://github.com/mediasuitenz/loopback-jsonapi-model-serializer/issues"
   },
-  "homepage": "https://github.com/digitalsadhu/loopback-jsonapi-model-serializer",
+  "homepage": "https://github.com/mediasuitenz/loopback-jsonapi-model-serializer",
   "author": {
-    "name": "Richard Walker",
-    "email": "digitalsadhu@gmail.com",
-    "url": "https://mediasuite.co.nz"
+    "name": "MadeCurious.",
+    "email": "developers@madecurious.com",
+    "url": "https://madcurious.com"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=22 || <23"
   },
   "scripts": {
-    "lint": "standard --verbose | snazzy",
-    "pretest": "npm run lint",
+    "lint": "prettier --write .",
     "test:dev": "ava --watch",
     "test": "ava --verbose",
-    "build": "babel src --presets babel-preset-es2015 --out-dir dist",
-    "prepublish": "npm test && npm prune && npm run build",
     "preversion:patch": "npm run test",
     "version:patch": "xyz -i patch",
     "preversion:minor": "npm run test",
@@ -35,34 +33,16 @@
     "version:major": "xyz -i major"
   },
   "publishConfig": {
-    "registry": "http://registry.npmjs.org"
+    "registry": "https://registry.npmjs.org"
   },
-  "keywords": [
-    "loopback",
-    "model",
-    "serializer",
-    "jsonapi"
-  ],
-  "dependencies": {
-    "lodash": "^4.13.1"
-  },
+  "keywords": ["loopback", "model", "serializer", "jsonapi"],
   "devDependencies": {
-    "ava": "^0.15.2",
-    "babel-cli": "^6.10.1",
-    "babel-eslint": "^6.1.2",
-    "babel-preset-es2015": "^6.9.0",
+    "ava": "^6.4.1",
     "chai": "^3.5.0",
-    "loopback": "^2.29.1",
-    "loopback-datasource-juggler": "^2.47.0",
-    "mocha": "^2.5.3",
-    "mocha-given": "^0.1.3",
-    "snazzy": "^4.0.0",
-    "standard": "^7.1.2",
-    "testem": "^1.10.0-1",
+    "loopback": "^3.28.0",
+    "loopback-datasource-juggler": "^3.36.1",
+    "mocha": "^3.5.3",
+    "prettier": "^3.6.2",
     "xyz": "^0.5.0"
-  },
-  "peerDependencies": {},
-  "standard": {
-    "parser": "babel-eslint"
   }
 }

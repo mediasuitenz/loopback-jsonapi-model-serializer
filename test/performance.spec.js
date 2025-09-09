@@ -1,16 +1,16 @@
 import test from 'ava'
 import loopback from 'loopback'
-import serialize from '../src'
+import serializer from '../lib/serializer.js'
 
-test.beforeEach(t => {
-  const app = t.context.app = loopback()
+test.before((t) => {
+  const app = (t.context.app = loopback())
   app.set('legacyExplorer', false)
 
   const ds = loopback.createDataSource('memory')
 
-  const Post = ds.createModel('post', {title: String})
-  const Comment = ds.createModel('comment', {title: String})
-  const Author = ds.createModel('author', {name: String})
+  const Post = ds.createModel('post', { title: String })
+  const Comment = ds.createModel('comment', { title: String })
+  const Author = ds.createModel('author', { name: String })
 
   app.model(Post)
   app.model(Author)
@@ -23,29 +23,29 @@ test.beforeEach(t => {
   app.use(loopback.rest())
 })
 
-test.beforeEach(async t => {
+test.before(async (t) => {
   const { Post, Author, Comment } = t.context.app.models
-  const author = await Author.create({name: 'Bob Smith'})
+  const author = await Author.create({ name: 'Bob Smith' })
   for (let i = 0; i < 1000; i++) {
-    const post = await Post.create({title: `post ${i}`, authorId: author.id})
+    const post = await Post.create({ title: `post ${i}`, authorId: author.id })
     for (let x = 0; x < 10; x++) {
-      await Comment.create({title: 'my comment', postId: post.id, authorId: author.id})
+      await Comment.create({ title: 'my comment', postId: post.id, authorId: author.id })
     }
   }
 })
 
-test.beforeEach(async t => {
+test.beforeEach(async (t) => {
   const { Post } = t.context.app.models
-  const posts = await Post.find({include: ['author', {comments: 'author'}]})
+  const posts = await Post.find({ include: ['author', { comments: 'author' }] })
   t.context.posts = posts
 })
 
-test('performance test serializing 1000 posts with nested relations', t => {
+test('performance test serializing 1000 posts with nested relations', (t) => {
   t.plan(4)
   const { Post } = t.context.app.models
   const data = t.context.posts
 
-  const posts = serialize(data, Post)
+  const posts = serializer({ baseUrl: 'http://example' }).serialize(data, Post)
 
   t.truthy(posts)
   t.true(Array.isArray(posts.data))

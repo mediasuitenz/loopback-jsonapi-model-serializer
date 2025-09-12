@@ -1,10 +1,12 @@
 {
   "name": "@mediasuite/loopback-jsonapi-model-serializer",
   "description": "JSONAPI Model serializer for loopback",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "license": "MIT",
   "main": "./lib/index.js",
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mediasuitenz/loopback-jsonapi-model-serializer.git"
@@ -35,7 +37,12 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
-  "keywords": ["loopback", "model", "serializer", "jsonapi"],
+  "keywords": [
+    "loopback",
+    "model",
+    "serializer",
+    "jsonapi"
+  ],
   "devDependencies": {
     "ava": "^6.4.1",
     "chai": "^3.5.0",

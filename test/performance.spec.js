@@ -1,6 +1,6 @@
 import test from 'ava'
 import loopback from 'loopback'
-import serializer from '../lib/serializer.js'
+import serializer from '../lib/index.js'
 
 test.before((t) => {
   const app = (t.context.app = loopback())
@@ -45,7 +45,7 @@ test('performance test serializing 1000 posts with nested relations', (t) => {
   const { Post } = t.context.app.models
   const data = t.context.posts
 
-  const posts = serializer({ baseUrl: 'http://example' }).serialize(data, Post)
+  const posts = serializer(data, Post, { baseUrl: 'http://example' })
 
   t.truthy(posts)
   t.true(Array.isArray(posts.data))

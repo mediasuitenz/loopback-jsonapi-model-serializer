@@ -51,5 +51,8 @@
     "mocha": "^3.5.3",
     "prettier": "^3.6.2",
     "xyz": "^0.5.0"
+  },
+  "dependencies": {
+    "lodash.merge": "^4.6.2"
   }
 }
